@@ -7,7 +7,7 @@ jobs:
   pytest:
     name: Run tests with pytest
     runs-on: ubuntu-latest
-    straregy:
+    strategy:
       matrix:
         python-version: [3.7, 3.8]
     steps:
@@ -28,4 +28,4 @@ jobs:
         run: poetry install --no-interaction
       # pytest を実行する
       - name: Run Tests
-        run: poetry run pytest test_hello.py
+        run: poetry run pytest test_hello.pys
