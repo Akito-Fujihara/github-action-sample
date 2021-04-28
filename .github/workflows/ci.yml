@@ -1,4 +1,5 @@
-name: pytest
+name: Tests and Style Check
+
 on:
   push:
   pull_request:
@@ -11,21 +12,20 @@ jobs:
       matrix:
         python-version: [3.7, 3.8]
     steps:
+      # See: https://github.com/actions/checkout
       - name: Checkout
         uses: actions/checkout@v2
+      # See: https://github.com/actions/setup-python
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python-version }}
+      # Poetry そのものをインストールする
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-      # Poetry へのパスを通す
-      # - name: Add path for Poetry
-      #   run: echo "::add-path::$HOME/.poetry/bin"
-      # インストールした Poetry を使って必要な Python パッケージをインストールする
+          echo "::add-path::$HOME/.poetry/bin"
       - name: Install Dependencies
         run: poetry install --no-interaction
-      # pytest を実行する
       - name: Run Tests
         run: poetry run pytest test_hello.py
