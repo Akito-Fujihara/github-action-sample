@@ -28,4 +28,4 @@ jobs:
         run: poetry install --no-interaction
       # pytest を実行する
       - name: Run Tests
-        run: poetry run pytest test_hello.pys
+        run: poetry run pytest test_hello.py
